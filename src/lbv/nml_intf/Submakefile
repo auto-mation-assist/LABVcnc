@@ -1,0 +1,32 @@
+INCLUDES += lbv/nml_intf
+
+LIBLBVSRCS := \
+    lbv/nml_intf/lbvglb.c \
+    lbv/nml_intf/lbv.cc \
+    lbv/nml_intf/lbvpose.c \
+    lbv/nml_intf/lbvargs.cc \
+    lbv/nml_intf/lbvops.cc \
+    lbv/nml_intf/canon_position.cc \
+    lbv/ini/lbvIniFile.cc \
+    lbv/ini/iniaxis.cc \
+    lbv/ini/inijoint.cc \
+    lbv/ini/initool.cc \
+    lbv/ini/initraj.cc \
+    lbv/ini/inihal.cc \
+    lbv/nml_intf/interpl.cc
+USERSRCS += $(LIBLBVSRCS)
+
+$(call TOOBJSDEPS, $(LIBLBVSRCS)) : EXTRAFLAGS=-fPIC
+
+TARGETS += ../lib/liblabvcnc.a
+
+../lib/liblabvcnc.a: $(call TOOBJS,$(LIBLBVSRCS))
+	$(ECHO) Linking $(notdir $@)
+	@mkdir -p ../lib
+	@rm -f $@
+	@$(AR) $(ARFLAGS) $@ $^
+
+$(patsubst ./lbv/nml_intf/%,../include/%,$(wildcard ./lbv/nml_intf/*.h)): ../include/%.h: ./lbv/nml_intf/%.h
+	cp $^ $@
+$(patsubst ./lbv/nml_intf/%,../include/%,$(wildcard ./lbv/nml_intf/*.hh)): ../include/%.hh: ./lbv/nml_intf/%.hh
+	cp $^ $@

@@ -1,0 +1,36 @@
+
+LBVSVRSRCS := \
+	lbv/task/lbvsvr.cc
+USERSRCS += $(LBVSVRSRCS)
+
+../bin/labvcncsvr: $(call TOOBJS, $(LBVSVRSRCS)) ../lib/liblabvcnc.a ../lib/libnml.so.0 ../lib/liblabvcncini.so.0
+	$(ECHO) Linking $(notdir $@)
+	@$(CXX) $(LDFLAGS) -o $@ $^ 
+TARGETS += ../bin/labvcncsvr
+
+# disabled:	lbv/task/iotaskintf.cc
+MILLTASKSRCS := \
+	lbv/motion/lbvmotglb.c \
+	lbv/task/lbvtask.cc \
+	lbv/task/lbvcanon.cc \
+	lbv/task/lbvtaskmain.cc \
+	lbv/motion/usrmotintf.cc \
+	lbv/motion/lbvmotutil.c \
+	lbv/task/taskintf.cc \
+	lbv/motion/dbuf.c \
+	lbv/motion/stashf.c \
+	lbv/rs274ngc/tool_parse.cc \
+	lbv/task/taskmodule.cc \
+	lbv/task/taskclass.cc \
+	lbv/task/backtrace.cc \
+
+USERSRCS += $(MILLTASKSRCS)
+
+#LDFLAGS +=
+
+../bin/milltask: $(call TOOBJS, $(MILLTASKSRCS)) ../lib/librs274.so.0 ../lib/liblabvcnc.a ../lib/libnml.so.0 ../lib/liblabvcncini.so.0 ../lib/libposemath.so.0 ../lib/liblabvcnchal.so.0 ../lib/libpyplugin.so.0
+
+
+	$(ECHO) Linking $(notdir $@)
+	$(CXX) -o $@ $^ $(LDFLAGS) $(BOOST_PYTHON_LIBS) -l$(LIBPYTHON)
+TARGETS += ../bin/milltask

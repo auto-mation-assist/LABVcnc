@@ -1,0 +1,18 @@
+TARGETS += ../bin/rs274
+#  builtin_modules.cc
+SAISRCS := $(addprefix lbv/sai/, saicanon.cc driver.cc dummylbvstat.cc) \
+	lbv/rs274ngc/tool_parse.cc lbv/task/taskmodule.cc lbv/task/taskclass.cc
+USERSRCS += $(SAISRCS)
+
+INCLUDES += lbv/sai
+
+../bin/rs274: $(call TOOBJS, $(SAISRCS)) ../lib/librs274.so.0 ../lib/liblabvcnc.a ../lib/libnml.so.0 \
+	../lib/liblabvcnchal.so.0 ../lib/liblabvcncini.so.0 ../lib/libpyplugin.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ $(ULFLAGS) $(BOOST_PYTHON_LIBS) -l$(LIBPYTHON) $(READLINE_LIBS)
+
+$(patsubst ./lbv/sai/%,../include/%,$(wildcard ./lbv/sai/*.h)): ../include/%.h: ./lbv/sai/%.h
+	cp $^ $@
+$(patsubst ./lbv/sai/%,../include/%,$(wildcard ./lbv/sai/*.hh)): ../include/%.hh: ./lbv/sai/%.hh
+	cp $^ $@
+

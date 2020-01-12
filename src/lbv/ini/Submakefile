@@ -1,0 +1,6 @@
+INCLUDES += lbv/ini
+
+$(patsubst ./lbv/ini/%,../include/%,$(wildcard ./lbv/ini/*.h)): ../include/%.h: ./lbv/ini/%.h
+	cp $^ $@
+$(patsubst ./lbv/ini/%,../include/%,$(wildcard ./lbv/ini/*.hh)): ../include/%.hh: ./lbv/ini/%.hh
+	cp $^ $@

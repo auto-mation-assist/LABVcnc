@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=French Integrator Manual
+Type=Application
+Exec=/usr/bin/see /usr/share/doc/labvcnc/LabvCNC_Integrator_Manual_fr.pdf
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Comment=Installation and Configuration Manual (French)
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;

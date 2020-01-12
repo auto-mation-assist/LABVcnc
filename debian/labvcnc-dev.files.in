@@ -1,0 +1,9 @@
+usr/include/labvcnc/*.hh
+usr/include/labvcnc/*.h
+usr/lib/*.a
+usr/lib/*.so
+usr/share/man/man1/halcompile.1
+usr/share/man/man3/*
+usr/bin/halcompile
+usr/share/doc/labvcnc-dev/*
+usr/share/labvcnc/Makefile.modinc

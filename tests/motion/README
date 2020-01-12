@@ -1,0 +1,6 @@
+
+The "motion" tests start a full lbv in sim mode, with labvcncrsh as the UI.
+
+They run g-code programs and use halsampler to monitor the motions that
+motmod emits to HAL.
+

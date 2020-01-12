@@ -1,0 +1,41 @@
+LBVSHSRCS := lbv/usr_intf/lbvsh.cc \
+             lbv/usr_intf/shcom.cc
+LBVRSHSRCS := lbv/usr_intf/lbvrsh.cc \
+              lbv/usr_intf/shcom.cc
+LBVSCHEDSRCS := lbv/usr_intf/schedrmt.cc \
+              lbv/usr_intf/lbvsched.cc \
+              lbv/usr_intf/shcom.cc
+LBVLCDSRCS := lbv/usr_intf/lbvlcd.cc \
+              lbv/usr_intf/shcom.cc \
+              lbv/usr_intf/sockets.c
+
+HALUISRCS := lbv/usr_intf/halui.cc
+
+USERSRCS += $(LBVSHSRCS) $(LBVRSHSRCS) $(LBVSCHEDSRCS) $(LBVLCDSRCS) $(USRMOTSRCS) $(HALUISRCS)
+
+$(call TOOBJSDEPS, $(LBVSHSRCS)) : EXTRAFLAGS = $(ULFLAGS) $(TCL_CFLAGS) -fPIC
+
+../tcl/labvcnc.so: $(call TOOBJS, $(LBVSHSRCS)) ../lib/liblabvcnc.a ../lib/liblabvcncini.so.0 ../lib/libnml.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) -shared $(LDFLAGS) -o $@ $(ULFLAGS) $(TCL_CFLAGS) $^ $(TCL_LIBS) -lXinerama
+TARGETS += ../tcl/labvcnc.so
+
+../bin/labvcncrsh: $(call TOOBJS, $(LBVRSHSRCS)) ../lib/liblabvcnc.a ../lib/libnml.so.0 ../lib/liblabvcncini.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $(ULFLAGS) $^ -lpthread
+TARGETS += ../bin/labvcncrsh
+
+../bin/schedrmt: $(call TOOBJS, $(LBVSCHEDSRCS)) ../lib/liblabvcnc.a ../lib/libnml.so.0 ../lib/liblabvcncini.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $(ULFLAGS) $^ -lpthread
+TARGETS += ../bin/schedrmt
+
+../bin/labvcnclcd: $(call TOOBJS, $(LBVLCDSRCS)) ../lib/liblabvcnc.a ../lib/libnml.so.0 ../lib/liblabvcncini.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $(ULFLAGS) $^
+TARGETS += ../bin/labvcnclcd
+
+../bin/halui: $(call TOOBJS, $(HALUISRCS)) ../lib/liblabvcnc.a ../lib/liblabvcncini.so.0 ../lib/libnml.so.0 ../lib/liblabvcnchal.so.0
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $(ULFLAGS) $^ 
+TARGETS += ../bin/halui

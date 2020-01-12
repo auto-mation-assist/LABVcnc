@@ -1,0 +1,35 @@
+INCLUDES += lbv/kinematics
+
+GENSERKINSSRCS := \
+	lbv/kinematics/genserkins.c
+USERSRCS += $(GENSERKINSSRCS)
+
+DELTAMODULESRCS := lbv/kinematics/lineardeltakins.cc
+PYSRCS += $(DELTAMODULESRCS)
+$(call TOOBJS, $(DELTAMODULESRCS)): CFLAGS += -x c++ -Wno-declaration-after-statement
+
+DELTAMODULE := ../lib/python/lineardeltakins.so
+$(DELTAMODULE): $(call TOOBJS, $(DELTAMODULESRCS))
+	$(ECHO) Linking python module $(notdir $@)
+	$(CXX) $(LDFLAGS) -shared -o $@ $^ $(BOOST_PYTHON_LIBS)
+PYTARGETS += $(DELTAMODULE)
+
+../bin/genserkins: $(call TOOBJS, $(GENSERKINSSRCS)) ../lib/liblabvcnchal.so ../lib/libposemath.so
+	$(ECHO) Linking $(notdir $@)
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^
+TARGETS += ../bin/genserkins
+
+RDELTAMODULESRCS := lbv/kinematics/rotarydeltakins.cc
+PYSRCS += $(RDELTAMODULESRCS)
+$(call TOOBJS, $(RDELTAMODULESRCS)): CFLAGS += -x c++ -Wno-declaration-after-statement
+
+RDELTAMODULE := ../lib/python/rotarydeltakins.so
+$(RDELTAMODULE): $(call TOOBJS, $(RDELTAMODULESRCS))
+	$(ECHO) Linking python module $(notdir $@)
+	$(CXX) $(LDFLAGS) -shared -o $@ $^ $(BOOST_PYTHON_LIBS)
+PYTARGETS += $(RDELTAMODULE)
+
+$(patsubst ./lbv/kinematics/%,../include/%,$(wildcard ./lbv/kinematics/*.h)): ../include/%.h: ./lbv/kinematics/%.h
+	cp $^ $@
+$(patsubst ./lbv/kinematics/%,../include/%,$(wildcard ./lbv/kinematics/*.hh)): ../include/%.hh: ./lbv/kinematics/%.hh
+	cp $^ $@

@@ -1,0 +1,13 @@
+<RCC>
+<qresource prefix="/">
+    /home/jim/labvcnc/configs/qtdragon/images/x_minus_jog_button.png
+    /home/jim/labvcnc/configs/qtdragon/images/y_minus_jog_button.png
+    /home/jim/labvcnc/configs/qtdragon/images/z_minus_jog_button.png
+    /home/jim/labvcnc/configs/qtdragon/images/x_plus_jog_button.png<
+    /home/jim/labvcnc/configs/qtdragon/images/y_plus_jog_button.png<
+    /home/jim/labvcnc/configs/qtdragon/images/z_plus_jog_button.png
+    /home/jim/labvcnc/configs/qtdragon/images/machine_on.png
+    /home/jim/labvcnc/configs/qtdragon/images/machine_off.png
+    /home/jim/labvcnc/configs/qtdragon/images/tool_probe.png
+</qresource>
+</RCC>

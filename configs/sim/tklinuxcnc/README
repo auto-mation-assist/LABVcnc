@@ -1,0 +1,13 @@
+Sim files using tklabvcnc gui:
+
+ldelta.ini
+  -delta robot with linear joints
+
+servo_sim.ini
+  -simulation for a servo machine
+
+tklabvcnc.ini
+  -tcl/tk interface
+
+tripod.ini
+  -non-trivial kinematics machine

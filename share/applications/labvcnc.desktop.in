@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=
+Type=Application
+Exec=@LBV2_SCRIPT@
+Icon=@LBV2_ICON@
+X-GNOME-DocPath=
+Terminal=false
+Name=Labvcnc@LBV2_SUFFIX@
+Comment=Labvcnc Machine Controller
+StartupNotify=false
+Categories=X-CNC;

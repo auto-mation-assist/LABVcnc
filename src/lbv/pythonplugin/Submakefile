@@ -1,0 +1,28 @@
+#BOOST_DEBUG_FLAGS= -DBOOST_DEBUG_PYTHON -g -O0
+BOOST_DEBUG_FLAGS=
+
+INCLUDES += lbv/pythonplugin
+
+LIBPPSRCS := $(addprefix lbv/pythonplugin/, \
+	python_plugin.cc)
+
+USERSRCS += $(LIBPPSRCS)
+
+USERSRCS += $(TESTSRCS)
+
+$(call TOOBJSDEPS, $(LIBPPSRCS)) : EXTRAFLAGS=-fPIC $(BOOST_DEBUG_FLAGS) 
+
+
+TARGETS += ../lib/libpyplugin.so.0 
+
+../lib/libpyplugin.so.0: $(patsubst %.cc,objects/%.o,$(LIBPPSRCS)) ../lib/liblabvcncini.so
+	$(ECHO) Linking $(notdir $@)
+	@mkdir -p ../lib
+	@rm -f $@
+	$(CXX) -g $(LDFLAGS) -Wl,-soname,$(notdir $@) -shared -o $@ $^ -lstdc++ $(BOOST_PYTHON_LIBS) -l$(LIBPYTHON)
+
+
+$(patsubst ./lbv/pythonplugin/%,../include/%,$(wildcard ./lbv/pythonplugin/*.h)): ../include/%.h: ./lbv/pythonplugin/%.h
+	cp $^ $@
+$(patsubst ./lbv/pythonplugin/%,../include/%,$(wildcard ./lbv/pythonplugin/*.hh)): ../include/%.hh: ./lbv/pythonplugin/%.hh
+	cp $^ $@

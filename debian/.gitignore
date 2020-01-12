@@ -1,0 +1,13 @@
+labvcnc-uspace
+files
+rules
+control
+tmp
+labvcnc
+labvcnc-dev
+labvcnc-uspace-dev
+labvcnc-doc-*/
+*.substvars
+/labvcnc*.files
+*.debhelper
+shlibs.local
