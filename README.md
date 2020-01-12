@@ -1,6 +1,4 @@
-# LABVcnc
-
-# LabvCNC
+# LABVcnc or LabvCNC  - Having problem with upload of Base-1 file.
 
 Sunday, January 12,2020 - Johannes P. Fassotte - Auto-Mation-Assist
 
