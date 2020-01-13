@@ -1,0 +1,6 @@
+INCLUDES += lbv/tp
+
+$(patsubst ./lbv/tp/%,../include/%,$(wildcard ./lbv/tp/*.h)): ../include/%.h: ./lbv/tp/%.h
+	cp $^ $@
+$(patsubst ./lbv/tp/%,../include/%,$(wildcard ./lbv/tp/*.hh)): ../include/%.hh: ./lbv/tp/%.hh
+	cp $^ $@

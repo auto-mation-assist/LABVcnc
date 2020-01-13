@@ -1,0 +1,39 @@
+
+# Note: lbvsvr is the master for all NML channels, and therefore is the
+# first to start.
+
+# Buffers
+# Name                  Type    Host            size    neut?   (old)   buffer# MP ---
+
+# Top-level buffers to LBV
+B lbvCommand            SHMEM   localhost       8192    0       0       1       16 1001 TCP=5005 xdr queue confirm_write serial
+B lbvStatus             SHMEM   localhost      20480    0       0       2       16 1002 TCP=5005 xdr
+B lbvError              SHMEM   localhost       8192    0       0       3       16 1003 TCP=5005 xdr queue
+
+# These are for the IO controller, LBVIO
+B toolCmd               SHMEM   localhost       1024    0       0       4       16 1004 TCP=5005 xdr
+B toolSts               SHMEM   localhost       8192    0       0       5       16 1005 TCP=5005 xdr
+
+# Processes
+# Name          Buffer          Type    Host            Ops     server? timeout master? cnum
+
+P lbv           lbvCommand      LOCAL   localhost       RW      0       1.0     0       0
+P lbv           lbvStatus       LOCAL   localhost       W       0       1.0     0       0
+P lbv           lbvError        LOCAL   localhost       W       0       1.0     0       0
+P lbv           toolCmd         LOCAL   localhost       W       0       1.0     0       0
+P lbv           toolSts         LOCAL   localhost       R       0       1.0     0       0
+
+P lbvsvr        lbvCommand      LOCAL   localhost       W       1       1.0     1       2
+P lbvsvr        lbvStatus       LOCAL   localhost       R       1       1.0     1       2
+P lbvsvr        lbvError        LOCAL   localhost       R       1       1.0     1       2
+P lbvsvr        toolCmd         LOCAL   localhost       W       1       1.0     1       2
+P lbvsvr        toolSts         LOCAL   localhost       R       1       1.0     1       2
+P lbvsvr        default         LOCAL   localhost       RW      1       1.0     1       2
+
+P tool          lbvError        LOCAL   localhost       W       0       1.0     0       3
+P tool          toolCmd         LOCAL   localhost       R       0       1.0     0       3
+P tool          toolSts         LOCAL   localhost       W       0       1.0     0       3
+
+P xlbv          lbvCommand      LOCAL   localhost       W       0       10.0    0       10
+P xlbv          lbvStatus       LOCAL   localhost       R       0       10.0    0       10
+P xlbv          lbvError        LOCAL   localhost       R       0       10.0    0       10

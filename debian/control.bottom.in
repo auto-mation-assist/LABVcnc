@@ -1,0 +1,59 @@
+Package: @MAIN_PACKAGE_NAME@
+Conflicts: labvcnc-sim, @OTHER_MAIN_PACKAGE_NAME@
+Architecture: any
+Recommends: labvcnc-doc-en | labvcnc-doc, @EXTRA_RECOMMENDS@
+Depends: ${shlibs:Depends}, @KERNEL_DEPENDS@,
+    tcl@TCLTK_VERSION@, tk@TCLTK_VERSION@, bwidget (>= 1.7), libtk-img (>=1.13),
+    python (>= @PYTHON_VERSION@), python (<< @PYTHON_VERSION_NEXT@),
+    ${python:Depends}, ${misc:Depends},
+    python@PYTHON_VERSION@-tk,
+    python@PYTHON_VERSION@-glade2 | python-glade2,
+    python@PYTHON_VERSION@-numpy | python-numpy,
+    @PYTHON_IMAGING@,
+    @PYTHON_IMAGING_TK@,
+    python-gtksourceview2,
+    python-vte,
+    @PYTHON_GST@,
+    python-xlib, python-gtkglext1, python-configobj,
+    tclreadline, procps, psmisc, module-init-tools | kmod, tclx,
+    mesa-utils, blt
+Description: motion controller for CNC machines and robots
+ LabvCNC is the next-generation Enhanced Machine Controller which
+ provides motion control for CNC machine tools and robotic
+ applications (milling, cutting, routing, etc.).
+
+Package: labvcnc-doc-en
+Provides: labvcnc-doc
+Architecture: all
+Depends: ${misc:Depends}
+Suggests: pdf-viewer
+Description: motion controller for CNC machines and robots (English documentation)
+ LabvCNC is the next-generation Enhanced Machine Controller which
+ provides motion control for CNC machine tools and robotic
+ applications (milling, cutting, routing, etc.).
+ .
+ This package contains the documentation in English.
+
+Package: labvcnc-doc-fr
+Provides: labvcnc-doc
+Architecture: all
+Depends: ${misc:Depends}
+Suggests: pdf-viewer
+Description: motion controller for CNC machines and robots (French documentation)
+ LabvCNC is the next-generation Enhanced Machine Controller which
+ provides motion control for CNC machine tools and robotic
+ applications (milling, cutting, routing, etc.).
+ .
+ This package contains the documentation in French.
+
+Package: labvcnc-doc-es
+Provides: labvcnc-doc
+Architecture: all
+Depends: ${misc:Depends}
+Suggests: pdf-viewer
+Description: motion controller for CNC machines and robots (Spanish documentation)
+ LabvCNC is the next-generation Enhanced Machine Controller which
+ provides motion control for CNC machine tools and robotic
+ applications (milling, cutting, routing, etc.).
+ .
+ This package contains the documentation in Spanish.

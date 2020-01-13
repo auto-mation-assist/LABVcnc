@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=
+Type=Application
+Exec=/home/cnc/LABVcnc/scripts/labvcnc
+Icon=/home/cnc/LABVcnc/labvcncicon.png
+X-GNOME-DocPath=
+Terminal=false
+Name=Labvcnc (run-in-place)
+Comment=Labvcnc Machine Controller
+StartupNotify=false
+Categories=X-CNC;

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/usr/bin/latency-test
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Name=Latency Test
+Comment=Test your computers's latency
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;

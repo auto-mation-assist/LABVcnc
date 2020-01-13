@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Integrator Information
+Type=Application
+Exec=/usr/bin/see /usr/share/doc/labvcnc/LabvCNC_Integrator.pdf
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Comment=Integrator Information
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;
+Name[en_US]=Integrator Info

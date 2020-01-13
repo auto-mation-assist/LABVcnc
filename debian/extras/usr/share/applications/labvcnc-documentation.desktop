@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/usr/bin/see /usr/share/doc/labvcnc/LabvCNC_Documentation.pdf
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Name=Documentation
+Comment=LabvCNC Documentation
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;

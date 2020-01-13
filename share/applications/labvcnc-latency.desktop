@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=
+Type=Application
+Exec=/home/cnc/LABVcnc/scripts/latency-test
+Icon=/home/cnc/LABVcnc/labvcncicon.png
+X-GNOME-DocPath=
+Terminal=false
+Name=Latency Test (run-in-place)
+Comment=Determine your machine's latency
+StartupNotify=false
+Categories=X-CNC;

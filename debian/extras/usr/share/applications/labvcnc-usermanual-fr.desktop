@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/usr/bin/see /usr/share/doc/labvcnc/LabvCNC_User_Manual_fr.pdf
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Name=French User Manual
+Comment=The LabvCNC User Manual
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;

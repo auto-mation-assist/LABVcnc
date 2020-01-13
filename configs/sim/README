@@ -1,0 +1,5 @@
+Sim configurations make it possible to run LabvCNC without special hardware on a simulated basis.
+
+LabvCNC supports multiple guis and there are multiple examples for the most popular guis.
+
+The sim configurations are meant to run with no special hardware requirements

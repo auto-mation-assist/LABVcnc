@@ -1,0 +1,35 @@
+#!/bin/sh
+# file types supported: .ini, .demo
+
+LBV_BIN_DIR=@LBV2_BIN_DIR@
+LBV_SCRIPT_DIR=@LBV2_HOME@/scripts
+if [ -x $LBV_BIN_DIR/labvcnc ]; then
+    LBV=$LBV_BIN_DIR/labvcnc
+else
+    LBV=$LBV_SCRIPT_DIR/labvcnc
+fi
+
+filename="$1"
+name="$2"
+comment="$3"
+
+case ${filename##*.} in
+  ini) cat <<EOF
+[Desktop Entry]
+Name=$name
+Exec=$LBV '$filename'
+Type=Application
+Comment=$comment
+Icon=labvcncicon
+EOF
+;;
+  demo) cat <<EOF
+[Desktop Entry]
+Name=$name
+Exec=$filename
+Type=Application
+Comment=$comment
+Icon=labvcncicon
+EOF
+;;
+esac

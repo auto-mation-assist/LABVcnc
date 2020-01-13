@@ -1,0 +1,11 @@
+usr/share/applications/labvcnc.desktop
+usr/share/applications/labvcnc-gcoderef.desktop
+usr/share/applications/labvcnc-gcoderef-vi.desktop
+usr/share/applications/labvcnc-latency.desktop
+usr/share/applications/labvcnc-stepconf.desktop
+usr/share/applications/labvcnc-pncconf.desktop
+usr/share/desktop-directories/cnc.directory
+usr/share/pixmaps/labvcncicon.png
+etc/xdg/menus/applications-merged/cnc.menu
+lib/udev/rules.d/99-shuttle.rules
+lib/udev/rules.d/99-xhc.rules

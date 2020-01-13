@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/usr/bin/labvcnc
+Icon=labvcncicon
+X-GNOME-DocPath=
+Terminal=false
+Name=LabvCNC
+Comment=Configuration Launcher
+StartupNotify=false
+Categories=X-CNC;
+Keywords=cnc;labvcnc;
