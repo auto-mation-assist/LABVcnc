@@ -30,8 +30,8 @@ And one of each, LInuxCNC, LinuxCnC.
 
 Estimated about 75000 total name changes. Note that "emc"
 is also part of many other items, as an example "memcpy" a shared
-memory use definition. Do to the large number of changes the
-potential for errors could exist.
+memory use definition. Due to the large number of changes the
+potential for some errors could exist.
 
 --------------------------------------------------------------------
 
