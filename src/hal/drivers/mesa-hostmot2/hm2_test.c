@@ -77,7 +77,7 @@ static void set32(hm2_test_t *me, uint16_t addr, uint32_t val) {
 
 static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, int size) {
     hm2_test_t *me = this->private;
-    mlbvpy(buffer, &me->test_pattern.tp8[addr], size);
+    memcpy(buffer, &me->test_pattern.tp8[addr], size);
     return 1;  // success
 }
 

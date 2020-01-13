@@ -433,21 +433,21 @@ void hm2_ioport_print_module(hostmot2_t *hm2) {
 static void hm2_ioport_force_write_ddr(hostmot2_t *hm2) {
     int size = hm2->ioport.num_instances * sizeof(rtapi_u32);
     hm2->llio->write(hm2->llio, hm2->ioport.ddr_addr, hm2->ioport.ddr_reg, size);
-    mlbvpy(hm2->ioport.written_ddr, hm2->ioport.ddr_reg, size);
+    memcpy(hm2->ioport.written_ddr, hm2->ioport.ddr_reg, size);
 }
 
 
 static void hm2_ioport_force_write_output_invert(hostmot2_t *hm2) {
     int size = hm2->ioport.num_instances * sizeof(rtapi_u32);
     hm2->llio->write(hm2->llio, hm2->ioport.output_invert_addr, hm2->ioport.output_invert_reg, size);
-    mlbvpy(hm2->ioport.written_output_invert, hm2->ioport.output_invert_reg, size);
+    memcpy(hm2->ioport.written_output_invert, hm2->ioport.output_invert_reg, size);
 }
 
 
 static void hm2_ioport_force_write_open_drain(hostmot2_t *hm2) {
     int size = hm2->ioport.num_instances * sizeof(rtapi_u32);
     hm2->llio->write(hm2->llio, hm2->ioport.open_drain_addr, hm2->ioport.open_drain_reg, size);
-    mlbvpy(hm2->ioport.written_open_drain, hm2->ioport.open_drain_reg, size);
+    memcpy(hm2->ioport.written_open_drain, hm2->ioport.open_drain_reg, size);
 }
 
 

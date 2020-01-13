@@ -212,7 +212,7 @@ static int number_of_cores(void)
 
     if( (fp = fopen("/proc/cpuinfo", "r")) ) {
 	while(fgets(str, sizeof str, fp))
-	    if( !mlbvmp(str, "processor", 9) ) procCount++;
+	    if( !memcmp(str, "processor", 9) ) procCount++;
     }
     if ( !procCount ) {
 	rtapi_print_msg(RTAPI_MSG_ERR,"HAL_PI_GPIO: Unable to get proc count. Defaulting to 2");

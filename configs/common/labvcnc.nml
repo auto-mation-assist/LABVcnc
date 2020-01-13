@@ -34,6 +34,8 @@ P tool          lbvError        LOCAL   localhost       W       0       1.0     
 P tool          toolCmd         LOCAL   localhost       R       0       1.0     0       3
 P tool          toolSts         LOCAL   localhost       W       0       1.0     0       3
 
-P xlbv          lbvCommand      LOCAL   localhost       W       0       10.0    0       10
-P xlbv          lbvStatus       LOCAL   localhost       R       0       10.0    0       10
-P xlbv          lbvError        LOCAL   localhost       R       0       10.0    0       10
+P xlbv          lbvCommand      REMOTE  10.10.20.1      W       0       10.0    0       4
+P xlbv          lbvStatus       REMOTE  10.10.20.1      R       0       10.0    0       4
+P xlbv          lbvError        REMOTE  10.10.20.1      R       0       10.0    0       4
+P xlbv          toolCmd         REMOTE  10.10.20.1      W       0       10.0    0       4
+P xlbv          toolSts         REMOTE  10.10.20.1      R       0       10.0    0       4

@@ -234,7 +234,7 @@ static int check_cookie(hm2_spi_t *board) {
     int r = do_read(&board->llio, 0x100, cookie, 16);
     if(r < 0) return -errno;
 
-    if(mlbvmp(cookie, xcookie, sizeof(cookie))) {
+    if(memcmp(cookie, xcookie, sizeof(cookie))) {
         rtapi_print_msg(RTAPI_MSG_ERR, "Invalid cookie\n");
         rtapi_print_msg(RTAPI_MSG_ERR, "Read: %08x %08x %08x %08x\n",
             cookie[0], cookie[1], cookie[2], cookie[3]);
@@ -267,7 +267,7 @@ static int probe(char *dev, int rate) {
 
     char *base;
 
-    if(!mlbvmp(ident, "MESA7I43", 8)) {
+    if(!memcmp(ident, "MESA7I43", 8)) {
         base = "hm2_7i43spi";
         board->llio.num_ioport_connectors = 2;
         board->llio.pins_per_connector = 24;
@@ -275,7 +275,7 @@ static int probe(char *dev, int rate) {
         board->llio.ioport_connector_name[1] = "P3";
         board->llio.num_leds = 8;
         board->llio.fpga_part_number = "3s400tq144";
-    } else if(!mlbvmp(ident, "MESA7I90", 8)) {
+    } else if(!memcmp(ident, "MESA7I90", 8)) {
         base = "hm2_7i90";
         board->llio.num_ioport_connectors = 3;
         board->llio.pins_per_connector = 24;

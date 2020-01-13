@@ -352,7 +352,7 @@ void config_8i20(hostmot2_t *hm2, hm2_sserial_remote_t *chan){
     chan->num_modes=0;
     chan->num_confs = sizeof(hm2_8i20_params) / sizeof(hm2_sserial_data_t);
     chan->confs = rtapi_kzalloc(sizeof(hm2_8i20_params),RTAPI_GFP_KERNEL);
-    mlbvpy(chan->confs, hm2_8i20_params, sizeof(hm2_8i20_params));
+    memcpy(chan->confs, hm2_8i20_params, sizeof(hm2_8i20_params));
 
     //8i20 has reprogrammable current scaling:
     buff = 0;
@@ -360,7 +360,7 @@ void config_8i20(hostmot2_t *hm2, hm2_sserial_remote_t *chan){
     chan->confs[1].ParmMax = buff * 0.01;
     chan->confs[1].ParmMin = buff * -0.01;
     chan->globals = rtapi_kzalloc(sizeof(hm2_8i20_globals), RTAPI_GFP_KERNEL);
-    mlbvpy(chan->globals, hm2_8i20_globals, sizeof(hm2_8i20_globals));
+    memcpy(chan->globals, hm2_8i20_globals, sizeof(hm2_8i20_globals));
     chan->num_globals = sizeof(hm2_8i20_globals) / sizeof(hm2_sserial_data_t);
 }
 
@@ -368,7 +368,7 @@ void config_7i64(hostmot2_t *hm2, hm2_sserial_remote_t *chan){
     chan->num_modes=0;
     chan->num_confs = sizeof(hm2_7i64_params) / sizeof(hm2_sserial_data_t);
     chan->confs = rtapi_kzalloc(sizeof(hm2_7i64_params), RTAPI_GFP_KERNEL);
-    mlbvpy(chan->confs, hm2_7i64_params, sizeof(hm2_7i64_params));
+    memcpy(chan->confs, hm2_7i64_params, sizeof(hm2_7i64_params));
 }
 
 int hm2_sserial_get_param_value(hostmot2_t *hm2,
@@ -1662,10 +1662,10 @@ fail1:
                         case LBP_NONVOL_FLOAT:
                             if (g->DataLength == sizeof(float) * 8 ){
                                 float temp = p->float_param;
-                                mlbvpy(r->reg_0_write, &temp, sizeof(float));    // Data Value
+                                memcpy(r->reg_0_write, &temp, sizeof(float));    // Data Value
                             } else if (g->DataLength == sizeof(double) * 8){
                                 double temp = p->float_param;
-                                mlbvpy(r->reg_0_write, &temp, sizeof(double));
+                                memcpy(r->reg_0_write, &temp, sizeof(double));
                             } else {
                                 HM2_ERR("sserial write: LBP_FLOAT of bit-length %i not handled\n", g->DataLength);
                                 p->type= LBP_PAD; // only warn once, then ignore
@@ -1889,10 +1889,10 @@ void hm2_sserial_write_pins(hostmot2_t *hm2, hm2_sserial_instance_t *inst){
                     case LBP_FLOAT:
                         if (conf->DataLength == sizeof(float) * 8 ){
                             float temp = *pin->float_pin;
-                            mlbvpy(&buff, &temp, sizeof(float));
+                            memcpy(&buff, &temp, sizeof(float));
                         } else if (conf->DataLength == sizeof(double) * 8){
                             double temp = *pin->float_pin;
-                            mlbvpy(&buff, &temp, sizeof(double));
+                            memcpy(&buff, &temp, sizeof(double));
                         } else {
                             HM2_ERR_NO_LL("sserial write: LBP_FLOAT of bit-length %i not handled\n", conf->DataLength);
                             conf->DataType = 0; // only warn once, then ignore
@@ -2116,11 +2116,11 @@ int hm2_sserial_read_pins(hm2_sserial_remote_t *chan){
             case LBP_FLOAT:
                 if (conf->DataLength == sizeof(float) * 8){
                     float temp;
-                    mlbvpy(&temp, &buff, sizeof(float));
+                    memcpy(&temp, &buff, sizeof(float));
                     *pin->float_pin = temp;
                 } else if (conf->DataLength == sizeof(double) * 8){
                     double temp;
-                    mlbvpy(&temp, &buff, sizeof(double));
+                    memcpy(&temp, &buff, sizeof(double));
                     *pin->float_pin = temp;
                 } else {
                     HM2_ERR_NO_LL("sserial read: LBP_FLOAT of bit-length %i not handled\n", conf->DataLength);

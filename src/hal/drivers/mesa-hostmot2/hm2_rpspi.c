@@ -826,7 +826,7 @@ static int32_t check_cookie(hm2_rpspi_t *board)
 	if(!board->llio.read(&board->llio, HM2_ADDR_IOCOOKIE, cookie, 16))
 		return -ENODEV;
 
-	if(!mlbvmp(cookie, xcookie, sizeof(xcookie)))
+	if(!memcmp(cookie, xcookie, sizeof(xcookie)))
 		return (int32_t)cookie[3];	// The cookie got read correctly
 
 	rtapi_print_msg(RPSPI_ERR, "hm2_rpspi: SPI%d/CE%d Invalid cookie, read: %08x %08x %08x,"
@@ -971,7 +971,7 @@ static int probe_board(hm2_rpspi_t *board) {
 	}
 	ident[sizeof(ident)-1] = 0;	// Because it may be used in printf, regardless format limits
 
-	if(!mlbvmp(ident, "MESA7I90", 8)) {
+	if(!memcmp(ident, "MESA7I90", 8)) {
 		base = "hm2_7i90";
 		board->llio.num_ioport_connectors = 3;
 		board->llio.pins_per_connector = 24;
@@ -980,7 +980,7 @@ static int probe_board(hm2_rpspi_t *board) {
 		board->llio.ioport_connector_name[2] = "P3";
 		board->llio.num_leds = 2;
 		board->llio.fpga_part_number = "xc6slx9tq144";
-	} else if(!mlbvmp(ident, "MESA7C80", 8)){
+	} else if(!memcmp(ident, "MESA7C80", 8)){
 		base = "hm2_7c80";
 		board->llio.num_ioport_connectors = 2;
 		board->llio.pins_per_connector = 27;
@@ -989,7 +989,7 @@ static int probe_board(hm2_rpspi_t *board) {
 		board->llio.io_connector_pin_names = hm2_7c80_pin_names;
 		board->llio.num_leds = 4;
 		board->llio.fpga_part_number = "xc6slx9tq144";
-	} else if(!mlbvmp(ident, "MESA7C81", 8)){
+	} else if(!memcmp(ident, "MESA7C81", 8)){
 		base = "hm2_7c81";
 		board->llio.num_ioport_connectors = 3;
 		board->llio.pins_per_connector = 19;

@@ -694,7 +694,7 @@ static int hm2_eth_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, i
     }
     if (recv < 0)
         return 0;
-    mlbvpy(buffer, tmp_buffer, size);
+    memcpy(buffer, tmp_buffer, size);
     return 1;  // success
 }
 
@@ -805,7 +805,7 @@ do_recv_packet:
     LL_PRINT_IF(debug, "enqueue_read(%d) : PACKET RECV [SIZE: %d | TRIES: %d | TIME: %llu]\n", board->read_cnt, recv, i, t2 - t1);
 
     for (i = 0; i < board->queue_reads_count; i++) {
-        mlbvpy(board->queue_reads[i].buffer, &tmp_buffer[board->queue_reads[i].from], board->queue_reads[i].size);
+        memcpy(board->queue_reads[i].buffer, &tmp_buffer[board->queue_reads[i].from], board->queue_reads[i].size);
     }
 
     if(board->confirm_read_cnt != board->read_cnt && t2 < read_deadline)
@@ -858,7 +858,7 @@ static int hm2_eth_write(hm2_lowlevel_io_t *this, rtapi_u32 addr, const void *bu
     hm2_eth_t *board = this->private;
     board->write_cnt++;
 
-    mlbvpy(packet.tmp_buffer, buffer, size);
+    memcpy(packet.tmp_buffer, buffer, size);
     LBP16_INIT_PACKET4(packet.wr_packet, CMD_WRITE_HOSTMOT2_ADDR32_INCR(size/4), addr & 0xFFFF);
 
     send = eth_socket_send(board->sockfd, (void*) &packet, sizeof(lbp16_cmd_addr) + size, 0);
@@ -880,7 +880,7 @@ static int hm2_eth_send_queued_writes(hm2_lowlevel_io_t *this) {
     lbp16_cmd_addr *packet = (lbp16_cmd_addr *) board->write_packet_ptr;
     LBP16_INIT_PACKET4(*packet, CMD_WRITE_TIMER_ADDR16_INCR(2), 0x14);
     board->write_packet_ptr += sizeof(*packet);
-    mlbvpy(board->write_packet_ptr, &board->write_cnt, 4);
+    memcpy(board->write_packet_ptr, &board->write_cnt, 4);
     board->write_packet_ptr += 4;
     board->write_packet_size += (sizeof(*packet) + 4);
     
@@ -906,7 +906,7 @@ static int hm2_eth_enqueue_write(hm2_lowlevel_io_t *this, rtapi_u32 addr, const 
     // XXX this is missing a check for exceeding the maximum packet size!
     LBP16_INIT_PACKET4_PTR(packet, CMD_WRITE_HOSTMOT2_ADDR32_INCR(size/4), addr);
     board->write_packet_ptr += sizeof(*packet);
-    mlbvpy(board->write_packet_ptr, buffer, size);
+    memcpy(board->write_packet_ptr, buffer, size);
     board->write_packet_ptr += size;
     board->write_packet_size += (sizeof(*packet) + size);
     return 1;
