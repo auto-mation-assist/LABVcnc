@@ -19,7 +19,7 @@ LinuxCnc work by others.
 
 LabvCNC has as its primary focus the use of remote user interfaces
 generated with Labview. This particular version of LinuxCnc provides
-the "name" changes that stricly meant to be a flag as to its potential
+the "name" changes that are stricly meant to be a flag as to its potential
 use with remote interfaces coded with Labview.
 
 Within the code the name or abbreviated name are these:
@@ -33,4 +33,4 @@ And one of each, LInuxCNC, LinuxCnC.
 Estimated about 75000 total name changes. Note that "emc"
 is also part of many other items, as an example "memcpy" a shared
 memory use definition. Do to the large number of changes the
-potential for errors could exist.
+potential for errors may exist. 
