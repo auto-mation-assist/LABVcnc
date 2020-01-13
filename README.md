@@ -1,5 +1,7 @@
 # LABVcnc or LabvCNC 
 
+This relates to using Linuxcnc with a Labview based remote GUI.
+
 Having problem uploading the base-1 file that goes with the discription.
 
 Sunday, January 12,2020 - Johannes P. Fassotte - Auto-Mation-Assist
