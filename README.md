@@ -9,7 +9,7 @@ Sunday, January 12,2020 - Johannes P. Fassotte - Auto-Mation-Assist
 Base-1 "name changes only" for for use in rebuilding
 LabvCNC (linuxcnc 2.9.0-pre0 (01/11/2020) used)
 
-To run this version use use the name labvcnc after compiling.
+To run this version with only the name changes use the name labvcnc after compiling.
 
 This version of LabvCNC is a modified version of
 linuxcnc 2.9.0-pre0 (01/11/2020), and has been modified to use the
