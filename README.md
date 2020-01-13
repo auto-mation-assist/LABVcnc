@@ -35,14 +35,20 @@ To run this version use the name labvcnc after using the normal
 compiling procedures such as the below.
 
 cd src
+
 ./autogen.sh
+
 ./configure --with-realtime=uspace --enable-non-distributable=yes
-make clean
-make                                                       #
+
+make
 sudo make setuid
+
 cd ..
+
 . ./scripts/rip-environment
+
 labvcnc
+
 
 --------------------------------------------------------------------
 
