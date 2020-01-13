@@ -2,9 +2,11 @@
 
 This relates to using Linuxcnc with a Labview based remote GUI.
 
-Having problem uploading the base-1 file that goes with the discription.
+Having a bit of a problem uploading the base-1 file that goes with the description.
 
-Sunday, January 12,2020   Johannes P. Fassotte   Auto-Mation-Assist
+Sunday, January 12,2020
+Johannes P. Fassotte
+Auto-Mation-Assist
 
 Base-1 "name changes only" for for use in rebuilding
 LabvCNC (linuxcnc 2.9.0-pre0 (01/11/2020) used)
