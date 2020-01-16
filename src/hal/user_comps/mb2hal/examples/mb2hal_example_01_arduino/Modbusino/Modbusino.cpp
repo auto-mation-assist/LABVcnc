@@ -272,7 +272,7 @@ static void reply(uint16_t *tab_reg, uint16_t nb_reg,
 
             rsp_length = build_response_basis(slave, function, rsp);
             /* 4 to copy the address (2) and the no. of registers */
-            mlbvpy(rsp + rsp_length, req + rsp_length, 4);
+            memcpy(rsp + rsp_length, req + rsp_length, 4);
             rsp_length += 4;
         }
     }

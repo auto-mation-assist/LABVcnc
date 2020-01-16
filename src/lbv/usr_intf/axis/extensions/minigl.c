@@ -274,7 +274,7 @@ static PyObject *pyglInterleavedArrays(PyObject *s, PyObject *o) {
     size = PyString_GET_SIZE(str);
     if(buf == NULL) buf = malloc(size);
     else buf = realloc(buf, size);
-    mlbvpy(buf, PyString_AS_STRING(str), size);
+    memcpy(buf, PyString_AS_STRING(str), size);
     glInterleavedArrays(format, stride, buf);
 
     CHECK_ERROR;

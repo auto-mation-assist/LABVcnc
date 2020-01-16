@@ -382,7 +382,7 @@ retCode parse_transaction_section(const int mb_tx_num)
         else {
             sprintf(mb_tx_name, "%02d", mb_tx_num);
         }
-        mlbvpy(&gbl.mb_tx[mb_tx_num], mb_tx, sizeof(mb_tx_t));
+        memcpy(&gbl.mb_tx[mb_tx_num], mb_tx, sizeof(mb_tx_t));
         rc = create_pins(mb_tx_name, &gbl.mb_tx[mb_tx_num], pin_name);
         free(pin_name);
         if (rc != retOK) {

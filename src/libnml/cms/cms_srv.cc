@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>		/* sscanf(),NULL, FILE, fopen(), fgets() */
-#include <string.h>		/* strchr(), mlbvpy() */
+#include <string.h>		/* strchr(), memcpy() */
 #include <stdlib.h>		/* malloc(), free(), exit() */
 #include <ctype.h>		// isgraph()
 #include <math.h>		/* fmod() */
@@ -338,7 +338,7 @@ void CMS_SERVER::read_passwd_file()
 	    break;
 	}
 	strcpy(user_info->passwd_file_line, buf);
-	mlbvpy(user_info->name, buf, user_name_length);
+	memcpy(user_info->name, buf, user_name_length);
 	passwd_length = strcspn(buf + user_name_length + 1, "\n\r \t:");
 	if (passwd_length > 16) {
 	    rcs_print_error("CMS_SERVER: password is too long.\n");
@@ -348,9 +348,9 @@ void CMS_SERVER::read_passwd_file()
 	    rcs_print_error("CMS_SERVER: password is too long.\n");
 	}
 	if (passwd_length > 2) {
-	    mlbvpy(user_info->passwd, buf + user_name_length + 1,
+	    memcpy(user_info->passwd, buf + user_name_length + 1,
 		passwd_length);
-	    mlbvpy(user_info->key1, buf + user_name_length + 1, 2);
+	    memcpy(user_info->key1, buf + user_name_length + 1, 2);
 	    user_info->has_passwd = 1;
 	} else {
 	    user_info->has_passwd = 0;

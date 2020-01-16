@@ -188,7 +188,7 @@ public:
         char * storage = storage_ptr();
         guard_type guard(storage);
 
-        mlbvpy(storage, &v, sizeof(value_type));
+        memcpy(storage, &v, sizeof(value_type));
     }
 
     value_type
@@ -198,7 +198,7 @@ public:
         guard_type guard(storage);
 
         value_type v;
-        mlbvpy(&v, storage, sizeof(value_type));
+        memcpy(&v, storage, sizeof(value_type));
         return v;
     }
 
@@ -212,11 +212,11 @@ public:
         char * storage = storage_ptr();
         guard_type guard(storage);
 
-        if (mlbvmp(storage, &expected, sizeof(value_type)) == 0) {
-            mlbvpy(storage, &desired, sizeof(value_type));
+        if (memcmp(storage, &expected, sizeof(value_type)) == 0) {
+            memcpy(storage, &desired, sizeof(value_type));
             return true;
         } else {
-            mlbvpy(&expected, storage, sizeof(value_type));
+            memcpy(&expected, storage, sizeof(value_type));
             return false;
         }
     }
@@ -238,9 +238,9 @@ public:
         guard_type guard(storage);
 
         value_type tmp;
-        mlbvpy(&tmp, storage, sizeof(value_type));
+        memcpy(&tmp, storage, sizeof(value_type));
 
-        mlbvpy(storage, &v, sizeof(value_type));
+        memcpy(storage, &v, sizeof(value_type));
         return tmp;
     }
 

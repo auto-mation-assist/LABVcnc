@@ -547,7 +547,7 @@ typedef enum greatest_test_res {
             &greatest_type_info_string, &size);                         \
     } while (0)                                                         \
 
-/* Fail if EXP is not equal to GOT, according to mlbvmp. */
+/* Fail if EXP is not equal to GOT, according to memcmp. */
 #define GREATEST_ASSERT_MEM_EQm(MSG, EXP, GOT, SIZE)                    \
     do {                                                                \
         greatest_memory_cmp_env env;                                    \
@@ -1035,7 +1035,7 @@ greatest_type_info greatest_type_info_string = {                        \
 static int greatest_memory_equal_cb(const void *expd, const void *got,  \
     void *udata) {                                                      \
     greatest_memory_cmp_env *env = (greatest_memory_cmp_env *)udata;    \
-    return (0 == mlbvmp(expd, got, env->size));                         \
+    return (0 == memcmp(expd, got, env->size));                         \
 }                                                                       \
                                                                         \
 /* Hexdump raw memory, with differences highlighted */                  \

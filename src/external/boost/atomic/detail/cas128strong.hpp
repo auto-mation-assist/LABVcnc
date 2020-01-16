@@ -199,7 +199,7 @@ public:
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT
     {
         memset(&v_, 0, sizeof(v_));
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
@@ -207,7 +207,7 @@ public:
     {
         storage_type value_s;
         memset(&value_s, 0, sizeof(value_s));
-        mlbvpy(&value_s, &value, sizeof(value_type));
+        memcpy(&value_s, &value, sizeof(value_type));
         platform_fence_before_store(order);
         platform_store128(value_s, &v_);
         platform_fence_after_store(order);
@@ -219,7 +219,7 @@ public:
         storage_type value_s = platform_load128(&v_);
         platform_fence_after_load(order);
         value_type value;
-        mlbvpy(&value, &value_s, sizeof(value_type));
+        memcpy(&value, &value_s, sizeof(value_type));
         return value;
     }
 
@@ -252,8 +252,8 @@ public:
         storage_type expected_s, desired_s;
         memset(&expected_s, 0, sizeof(expected_s));
         memset(&desired_s, 0, sizeof(desired_s));
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
 
         platform_fence_before(success_order);
         bool success = platform_cmpxchg128_strong(expected_s, desired_s, &v_);
@@ -262,7 +262,7 @@ public:
             platform_fence_after(success_order);
         } else {
             platform_fence_after(failure_order);
-            mlbvpy(&expected, &expected_s, sizeof(value_type));
+            memcpy(&expected, &expected_s, sizeof(value_type));
         }
 
         return success;

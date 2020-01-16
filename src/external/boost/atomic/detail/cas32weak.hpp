@@ -701,14 +701,14 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
     store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before_store(order);
         const_cast<volatile storage_type &>(v_) = tmp;
         platform_fence_after_store(order);
@@ -721,7 +721,7 @@ public:
         platform_fence_after_load(order);
 
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -742,8 +742,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
 
         platform_fence_before(success_order);
 
@@ -753,7 +753,7 @@ public:
             platform_fence_after(success_order);
         } else {
             platform_fence_after(failure_order);
-            mlbvpy(&expected, &expected_s, sizeof(value_type));
+            memcpy(&expected, &expected_s, sizeof(value_type));
         }
 
         return success;
@@ -809,14 +809,14 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
     store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before_store(order);
         const_cast<volatile storage_type &>(v_) = tmp;
         platform_fence_after_store(order);
@@ -829,7 +829,7 @@ public:
         platform_fence_after_load(order);
 
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -850,8 +850,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
 
         platform_fence_before(success_order);
 
@@ -861,7 +861,7 @@ public:
             platform_fence_after(success_order);
         } else {
             platform_fence_after(failure_order);
-            mlbvpy(&expected, &expected_s, sizeof(value_type));
+            memcpy(&expected, &expected_s, sizeof(value_type));
         }
 
         return success;
@@ -917,14 +917,14 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
     store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before_store(order);
         const_cast<volatile storage_type &>(v_) = tmp;
         platform_fence_after_store(order);
@@ -937,7 +937,7 @@ public:
         platform_fence_after_load(order);
 
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -958,8 +958,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
 
         platform_fence_before(success_order);
 
@@ -969,7 +969,7 @@ public:
             platform_fence_after(success_order);
         } else {
             platform_fence_after(failure_order);
-            mlbvpy(&expected, &expected_s, sizeof(value_type));
+            memcpy(&expected, &expected_s, sizeof(value_type));
         }
 
         return success;

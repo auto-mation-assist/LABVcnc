@@ -9333,7 +9333,7 @@ template <>
 struct Converter<float> {
     static_assert(sizeof(float) == sizeof(int32_t), "Important ULP matcher assumption violated");
     Converter(float f) {
-        std::mlbvpy(&i, &f, sizeof(f));
+        std::memcpy(&i, &f, sizeof(f));
     }
     int32_t i;
 };
@@ -9342,7 +9342,7 @@ template <>
 struct Converter<double> {
     static_assert(sizeof(double) == sizeof(int64_t), "Important ULP matcher assumption violated");
     Converter(double d) {
-        std::mlbvpy(&i, &d, sizeof(d));
+        std::memcpy(&i, &d, sizeof(d));
     }
     int64_t i;
 };
@@ -11485,7 +11485,7 @@ namespace Catch {
     void StringRef::takeOwnership() {
         if( !isOwned() ) {
             m_data = new char[m_size+1];
-            mlbvpy( m_data, m_start, m_size );
+            memcpy( m_data, m_start, m_size );
             m_data[m_size] = '\0';
             m_start = m_data;
         }

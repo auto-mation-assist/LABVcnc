@@ -25,7 +25,7 @@ extern "C" {
 #include <sys/stat.h>		/* S_IRUSR, etc. */
 #include <sys/types.h>		/* key_t */
 #include <errno.h>		// errno
-#include <string.h>		/* strchr(), mlbvpy(), memset() */
+#include <string.h>		/* strchr(), memcpy(), memset() */
 #include <stdlib.h>		/* strtod */
 #include <physmem.hh>           /* PHYSMEM_HANDLE */
 

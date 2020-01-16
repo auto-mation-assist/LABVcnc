@@ -21,7 +21,7 @@
 extern "C" {
 #endif
 
-#include <string.h>		/* mlbvpy() */
+#include <string.h>		/* memcpy() */
 #include <stdlib.h>		/* atexit() */
 #include <sys/param.h>		// MAXHOSTNAMELEN
 #include <netdb.h>

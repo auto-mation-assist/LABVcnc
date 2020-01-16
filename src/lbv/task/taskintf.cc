@@ -14,7 +14,7 @@
 
 #include <cmath>
 #include <float.h>		// DBL_MAX
-#include <string.h>		// mlbvpy() strncpy()
+#include <string.h>		// memcpy() strncpy()
 #include <unistd.h>             // unlink()
 
 #include "usrmotintf.h"		// usrmotInit(), usrmotReadLbvmotStatus(),

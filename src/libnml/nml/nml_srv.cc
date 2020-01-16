@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-#include <string.h>		/* mlbvpy() */
+#include <string.h>		/* memcpy() */
 
 #include <signal.h>		/* kill() */
 #include <sys/types.h>
@@ -279,7 +279,7 @@ REMOTE_WRITE_REPLY *NML_SERVER_LOCAL_PORT::writer(REMOTE_WRITE_REQUEST * _req)
     }
 
     /* Copy the encoded data to the location set up in CMS. */
-    // mlbvpy(cms->encoded_data, _req->data, _req->size);
+    // memcpy(cms->encoded_data, _req->data, _req->size);
     cms->header.in_buffer_size = _req->size;
     temp->size = _req->size;
     int *serial_number = cms->serial

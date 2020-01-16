@@ -15,7 +15,7 @@
 
 #include <math.h>		// fabs()
 #include <float.h>		// DBL_MAX
-#include <string.h>		// mlbvpy() strncpy()
+#include <string.h>		// memcpy() strncpy()
 #include <stdlib.h>		// malloc()
 
 #include "rcs.hh"		// RCS_CMD_CHANNEL, etc.
@@ -190,7 +190,7 @@ static int sendCommand(RCS_CMD_MSG * msg)
     }
 
     if (0 != last_io_command) {
-	mlbvpy(last_io_command, msg, msg->size);
+	memcpy(last_io_command, msg, msg->size);
     }
 
     return 0;
@@ -225,7 +225,7 @@ static int forceCommand(RCS_CMD_MSG * msg)
     }
 
     if (0 != last_io_command) {
-	mlbvpy(last_io_command, msg, msg->size);
+	memcpy(last_io_command, msg, msg->size);
     }
 
     return 0;

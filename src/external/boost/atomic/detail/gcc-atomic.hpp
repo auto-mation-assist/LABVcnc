@@ -570,13 +570,13 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         __atomic_store_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
     }
 
@@ -584,17 +584,17 @@ public:
     {
         storage_type tmp = __atomic_load_n(&v_, atomics::detail::convert_memory_order_to_gcc(order));
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
     value_type exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         tmp = __atomic_exchange_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -605,12 +605,12 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, false,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 
@@ -621,12 +621,12 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, true,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 
@@ -754,13 +754,13 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         __atomic_store_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
     }
 
@@ -768,17 +768,17 @@ public:
     {
         storage_type tmp = __atomic_load_n(&v_, atomics::detail::convert_memory_order_to_gcc(order));
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
     value_type exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         tmp = __atomic_exchange_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -789,12 +789,12 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, false,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 
@@ -805,12 +805,12 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, true,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 
@@ -961,14 +961,14 @@ public:
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT
     {
         memset(&v_, 0, sizeof(v_));
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void store(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp;
         memset(&tmp, 0, sizeof(tmp));
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         __atomic_store_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
     }
 
@@ -976,7 +976,7 @@ public:
     {
         storage_type tmp = __atomic_load_n(&v_, atomics::detail::convert_memory_order_to_gcc(order));
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -984,10 +984,10 @@ public:
     {
         storage_type tmp;
         memset(&tmp, 0, sizeof(tmp));
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         tmp = __atomic_exchange_n(&v_, tmp, atomics::detail::convert_memory_order_to_gcc(order));
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -1000,12 +1000,12 @@ public:
         storage_type expected_s, desired_s;
         memset(&expected_s, 0, sizeof(expected_s));
         memset(&desired_s, 0, sizeof(desired_s));
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, false,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 
@@ -1018,12 +1018,12 @@ public:
         storage_type expected_s, desired_s;
         memset(&expected_s, 0, sizeof(expected_s));
         memset(&desired_s, 0, sizeof(desired_s));
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         const bool success = __atomic_compare_exchange_n(&v_, &expected_s, desired_s, true,
             atomics::detail::convert_memory_order_to_gcc(success_order),
             atomics::detail::convert_memory_order_to_gcc(failure_order));
-        mlbvpy(&expected, &expected_s, sizeof(value_type));
+        memcpy(&expected, &expected_s, sizeof(value_type));
         return success;
     }
 

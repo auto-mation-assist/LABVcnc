@@ -265,7 +265,7 @@ private:
     OutputIterator copy_and_delete( T * first, T * last, OutputIterator out )
     {
         if (boost::has_trivial_destructor<T>::value) {
-            return std::copy(first, last, out); // will use mlbvpy if possible
+            return std::copy(first, last, out); // will use memcpy if possible
         } else {
             for (; first != last; ++first, ++out) {
                 *out = *first;

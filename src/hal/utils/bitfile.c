@@ -336,7 +336,7 @@ int bitfile_add_chunk(struct bitfile *bf, char tag, int len, unsigned char *data
     }
     bf->chunks[n].tag = tag;
     bf->chunks[n].len = len;
-    mlbvpy(bf->chunks[n].body, data, len);
+    memcpy(bf->chunks[n].body, data, len);
     bf->num_chunks++;
     return 0;
 }

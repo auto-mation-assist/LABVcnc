@@ -24,7 +24,7 @@ extern "C" {
 
 #include <stdlib.h>		/* malloc(), free() */
 #include <stddef.h>		/* size_t */
-#include <string.h>		/* strcpy(), strlen(),mlbvpy() */
+#include <string.h>		/* strcpy(), strlen(),memcpy() */
     /* strcmp(),strchr() */
 #include <ctype.h>		// tolower(), toupper()
 #include <errno.h>		/* errno, ERANGE */

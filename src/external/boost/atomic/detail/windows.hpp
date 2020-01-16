@@ -957,7 +957,7 @@ public:
 #else
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 #endif
 
@@ -966,7 +966,7 @@ public:
     {
         if (order != memory_order_seq_cst) {
             storage_type tmp = 0;
-            mlbvpy(&tmp, &v, sizeof(value_type));
+            memcpy(&tmp, &v, sizeof(value_type));
             platform_fence_before(order);
             const_cast<volatile storage_type &>(v_) = tmp;
         } else {
@@ -980,7 +980,7 @@ public:
         storage_type tmp = const_cast<volatile storage_type &>(v_);
         platform_fence_after_load(order);
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -988,7 +988,7 @@ public:
     exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before(order);
 #ifdef BOOST_ATOMIC_INTERLOCKED_EXCHANGE8
         tmp = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_EXCHANGE8(&v_, tmp));
@@ -997,7 +997,7 @@ public:
 #endif
         platform_fence_after(order);
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -1009,8 +1009,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         platform_fence_before(success_order);
 #ifdef BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE8
         storage_type oldval = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE8(&v_, desired_s, expected_s));
@@ -1022,7 +1022,7 @@ public:
             platform_fence_after(success_order);
         else
             platform_fence_after(failure_order);
-        mlbvpy(&expected, &oldval, sizeof(value_type));
+        memcpy(&expected, &oldval, sizeof(value_type));
         return success;
     }
 
@@ -1076,7 +1076,7 @@ public:
 #else
     explicit base_atomic(value_type const& v) BOOST_NOEXCEPT : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 #endif
 
@@ -1085,7 +1085,7 @@ public:
     {
         if (order != memory_order_seq_cst) {
             storage_type tmp = 0;
-            mlbvpy(&tmp, &v, sizeof(value_type));
+            memcpy(&tmp, &v, sizeof(value_type));
             platform_fence_before(order);
             const_cast<volatile storage_type &>(v_) = tmp;
         } else {
@@ -1099,7 +1099,7 @@ public:
         storage_type tmp = const_cast<volatile storage_type &>(v_);
         platform_fence_after_load(order);
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -1107,7 +1107,7 @@ public:
     exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before(order);
 #ifdef BOOST_ATOMIC_INTERLOCKED_EXCHANGE16
         tmp = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_EXCHANGE16(&v_, tmp));
@@ -1116,7 +1116,7 @@ public:
 #endif
         platform_fence_after(order);
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -1128,8 +1128,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         platform_fence_before(success_order);
 #ifdef BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE16
         storage_type oldval = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE16(&v_, desired_s, expected_s));
@@ -1141,7 +1141,7 @@ public:
             platform_fence_after(success_order);
         else
             platform_fence_after(failure_order);
-        mlbvpy(&expected, &oldval, sizeof(value_type));
+        memcpy(&expected, &oldval, sizeof(value_type));
         return success;
     }
 
@@ -1185,7 +1185,7 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
@@ -1193,7 +1193,7 @@ public:
     {
         if (order != memory_order_seq_cst) {
             storage_type tmp = 0;
-            mlbvpy(&tmp, &v, sizeof(value_type));
+            memcpy(&tmp, &v, sizeof(value_type));
             platform_fence_before(order);
             const_cast<volatile storage_type &>(v_) = tmp;
         } else {
@@ -1207,7 +1207,7 @@ public:
         storage_type tmp = const_cast<volatile storage_type &>(v_);
         platform_fence_after_load(order);
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -1215,12 +1215,12 @@ public:
     exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before(order);
         tmp = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_EXCHANGE(&v_, tmp));
         platform_fence_after(order);
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -1232,8 +1232,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         platform_fence_before(success_order);
         storage_type oldval = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE(&v_, desired_s, expected_s));
         bool success = (oldval == expected_s);
@@ -1241,7 +1241,7 @@ public:
             platform_fence_after(success_order);
         else
             platform_fence_after(failure_order);
-        mlbvpy(&expected, &oldval, sizeof(value_type));
+        memcpy(&expected, &oldval, sizeof(value_type));
         return success;
     }
 
@@ -1445,7 +1445,7 @@ public:
     BOOST_DEFAULTED_FUNCTION(base_atomic(void), {})
     explicit base_atomic(value_type const& v) : v_(0)
     {
-        mlbvpy(&v_, &v, sizeof(value_type));
+        memcpy(&v_, &v, sizeof(value_type));
     }
 
     void
@@ -1453,7 +1453,7 @@ public:
     {
         if (order != memory_order_seq_cst) {
             storage_type tmp = 0;
-            mlbvpy(&tmp, &v, sizeof(value_type));
+            memcpy(&tmp, &v, sizeof(value_type));
             platform_fence_before(order);
             const_cast<volatile storage_type &>(v_) = tmp;
         } else {
@@ -1467,7 +1467,7 @@ public:
         storage_type tmp = const_cast<volatile storage_type &>(v_);
         platform_fence_after_load(order);
         value_type v;
-        mlbvpy(&v, &tmp, sizeof(value_type));
+        memcpy(&v, &tmp, sizeof(value_type));
         return v;
     }
 
@@ -1475,12 +1475,12 @@ public:
     exchange(value_type const& v, memory_order order = memory_order_seq_cst) volatile BOOST_NOEXCEPT
     {
         storage_type tmp = 0;
-        mlbvpy(&tmp, &v, sizeof(value_type));
+        memcpy(&tmp, &v, sizeof(value_type));
         platform_fence_before(order);
         tmp = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_EXCHANGE64(&v_, tmp));
         platform_fence_after(order);
         value_type res;
-        mlbvpy(&res, &tmp, sizeof(value_type));
+        memcpy(&res, &tmp, sizeof(value_type));
         return res;
     }
 
@@ -1492,8 +1492,8 @@ public:
         memory_order failure_order) volatile BOOST_NOEXCEPT
     {
         storage_type expected_s = 0, desired_s = 0;
-        mlbvpy(&expected_s, &expected, sizeof(value_type));
-        mlbvpy(&desired_s, &desired, sizeof(value_type));
+        memcpy(&expected_s, &expected, sizeof(value_type));
+        memcpy(&desired_s, &desired, sizeof(value_type));
         platform_fence_before(success_order);
         storage_type oldval = static_cast< storage_type >(BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE64(&v_, desired_s, expected_s));
         bool success = (oldval == expected_s);
@@ -1501,7 +1501,7 @@ public:
             platform_fence_after(success_order);
         else
             platform_fence_after(failure_order);
-        mlbvpy(&expected, &oldval, sizeof(value_type));
+        memcpy(&expected, &oldval, sizeof(value_type));
         return success;
     }
 
