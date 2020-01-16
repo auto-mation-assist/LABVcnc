@@ -441,9 +441,9 @@ proc watchLoop {} {
             set varnumtype [hal ptype $varname]
         }
         if {$ret == "TRUE"} {
-            $::cisp itlbvonfigure oval$cnum -fill yellow
+            $::cisp itemconfigure oval$cnum -fill yellow
         } elseif {$ret == "FALSE"} {
-            $::cisp itlbvonfigure oval$cnum -fill firebrick4
+            $::cisp itemconfigure oval$cnum -fill firebrick4
         } else {
             switch $varnumtype {
               u32 - s32  {set varnumtype int}
@@ -456,7 +456,7 @@ proc watchLoop {} {
             if {[info exists ::ifmt] && ("$varnumtype" == "int")} {
                set value [format "$::ifmt" $ret]
             }
-            $::cisp itlbvonfigure text$cnum -text $value
+            $::cisp itemconfigure text$cnum -text $value
         }
     }
     if {$::workmode == "watchhal"} {

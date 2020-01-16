@@ -127,8 +127,8 @@ class _Items:
     def itlbvget(self, index, option):
         return self.tk.call(self._w, "itlbvget", index, '-' + option)
 
-    def itlbvonfigure(self, index, cnf=None, **kw):
-        return self._configure(('itlbvonfigure', index), cnf, kw) 
+    def itemconfigure(self, index, cnf=None, **kw):
+        return self._configure(('itemconfigure', index), cnf, kw) 
 
 CASCADE="cascade"
 CHECKBUTTON="checkbutton"

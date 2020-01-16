@@ -1662,7 +1662,7 @@ if {0} {
           set tabname [string replace $tabname $idx end ""]
         }
         # show last subfile used as page name
-        $::ngc(any,axis,parent) itlbvonfigure $::ngc($hdl,axis,page) \
+        $::ngc(any,axis,parent) itemconfigure $::ngc($hdl,axis,page) \
               -createcmd "::ngcgui::pagecreate $hdl"\
               -raisecmd  "::ngcgui::pageraise  $hdl"\
               -leavecmd  "::ngcgui::pageleave  $hdl"\
@@ -1686,7 +1686,7 @@ if {0} {
             incr ct
             if {$ct>100} {return -code error "readsubfile:problem<$trytabname>"}
           }
-          $::ngc(any,axis,parent) itlbvonfigure $::ngc($hdl,axis,page) \
+          $::ngc(any,axis,parent) itemconfigure $::ngc($hdl,axis,page) \
                                   -text "$tryname"
         }
       }
@@ -2389,7 +2389,7 @@ proc ::ngcgui::message {hdl event} {
         if $::ngc($hdl,chooser) {
           set bcolor $::ngc(any,color,custom)
         }
-        $::ngc(any,axis,parent) itlbvonfigure $::ngc($hdl,axis,page) \
+        $::ngc(any,axis,parent) itemconfigure $::ngc($hdl,axis,page) \
             -foreground $::ngc(any,color,black) \
             -background $bcolor
       }
@@ -2438,11 +2438,11 @@ proc ::ngcgui::message {hdl event} {
 
       if [info exists ::ngc(embed,axis)] {
         if {$::ngc($hdl,savect) > 1} {
-          $::ngc(any,axis,parent) itlbvonfigure $::ngc($hdl,axis,page) \
+          $::ngc(any,axis,parent) itemconfigure $::ngc($hdl,axis,page) \
              -foreground $::ngc(any,color,multiple) \
              -background $::ngc(any,color,feature)
         } else {
-          $::ngc(any,axis,parent) itlbvonfigure $::ngc($hdl,axis,page) \
+          $::ngc(any,axis,parent) itemconfigure $::ngc($hdl,axis,page) \
              -foreground $::ngc(any,color,single) \
              -background $::ngc(any,color,feature)
         }
@@ -3420,7 +3420,7 @@ proc ::ngcgui::newpage {creatinghdl} {
               options=$::ngc(input,options) \
               gcmc_include_path=$::ngc(input,gcmc_include_path) \
              ]
-  $::ngc(any,axis,parent) itlbvonfigure $pageid \
+  $::ngc(any,axis,parent) itemconfigure $pageid \
         -createcmd "::ngcgui::pagecreate $newhdl"\
         -raisecmd  "::ngcgui::pageraise  $newhdl"\
         -leavecmd  "::ngcgui::pageleave  $newhdl"
@@ -3712,7 +3712,7 @@ proc ::ngcgui::embed_in_axis_tab {f args} {
     if {"$subfile" == "\"\""} {
       set ::ngc($hdl,chooser)        1
       set ::ngc($hdl,fname,subfile)  ""
-      $::ngc(any,axis,parent) itlbvonfigure $page \
+      $::ngc(any,axis,parent) itemconfigure $page \
             -text "[_ "Custom"]" \
             -background $::ngc(any,color,custom)
     } else {

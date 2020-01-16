@@ -1018,12 +1018,12 @@ proc watchLoop {} {
             set ret [lindex [exHAL "show $vartype $varname"] 3]
         }
         if {$ret == "TRUE"} {
-            $cisp itlbvonfigure oval$cnum -fill yellow
+            $cisp itemconfigure oval$cnum -fill yellow
         } elseif {$ret == "FALSE"} {
-            $cisp itlbvonfigure oval$cnum -fill firebrick4
+            $cisp itemconfigure oval$cnum -fill firebrick4
         } else {
             set value [expr $ret]
-            $cisp itlbvonfigure text$cnum -text $value
+            $cisp itemconfigure text$cnum -text $value
         }
     }
     if {$workmode == "watchhal"} {

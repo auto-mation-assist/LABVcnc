@@ -1102,10 +1102,10 @@ root_window.tk.call('font','configure','TkDefaultFont','-family',fname,'-size',f
 
 # redo the text in tabs so they resize for the new default font
 
-root_window.tk.call('.pane.top.tabs','itlbvonfigure','manual','-text',' Manual - F3 ')
-root_window.tk.call('.pane.top.tabs','itlbvonfigure','mdi','-text',' MDI - F5 ')
-root_window.tk.call('.pane.top.right','itlbvonfigure','preview','-text',' Preview ')
-root_window.tk.call('.pane.top.right','itlbvonfigure','numbers','-text',' DRO ')
+root_window.tk.call('.pane.top.tabs','itemconfigure','manual','-text',' Manual - F3 ')
+root_window.tk.call('.pane.top.tabs','itemconfigure','mdi','-text',' MDI - F5 ')
+root_window.tk.call('.pane.top.right','itemconfigure','preview','-text',' Preview ')
+root_window.tk.call('.pane.top.right','itemconfigure','numbers','-text',' DRO ')
 
 
 # gcode font is independent

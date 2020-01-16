@@ -1030,7 +1030,7 @@ class Progress:
             self.text = root_window.tk.call(".info.progress", "create", "text",
                 (1, 1), "-text", text, "-anchor", "nw")
         else:
-            root_window.tk.call(".info.progress", "itlbvonfigure", text,
+            root_window.tk.call(".info.progress", "itemconfigure", text,
                 "-text", text)
 
 class AxisCanon(GLCanon, StatMixin):
