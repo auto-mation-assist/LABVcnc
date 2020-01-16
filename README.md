@@ -2,10 +2,8 @@
 
 Sunday, January 12,2020 - Johannes P. Fassotte - Auto-Mation-Assist
 
-Base-1 "name changes only" for for use in rebuilding
+Base-1 "name changes only" for use in the start of building
 LabvCNC (linuxcnc 2.9.0-pre0 (01/11/2020) used)
-
-To run this version use use the name labvcnc after compiling.
 
 This version of LabvCNC is a modified version of
 linuxcnc 2.9.0-pre0 (01/11/2020), and has been modified to use the
@@ -30,8 +28,27 @@ And one of each, LInuxCNC, LinuxCnC.
 
 Estimated about 75000 total name changes. Note that "emc"
 is also part of many other items, as an example "memcpy" a shared
-memory use definition. Do to the large number of changes the
-potential for errors could exist.
+memory use definition. Due to the large number of changes the
+potential for some errors could exist.
+
+To run this version use the name labvcnc after using the normal
+compiling procedures such as the below.
+
+cd src
+
+./autogen.sh
+
+./configure --with-realtime=uspace --enable-non-distributable=yes
+
+make
+sudo make setuid
+
+cd ..
+
+. ./scripts/rip-environment
+
+labvcnc
+
 
 --------------------------------------------------------------------
 
